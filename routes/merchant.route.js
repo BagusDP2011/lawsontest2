@@ -1,17 +1,17 @@
 const express = require("express");
-const masterStatusController = require("../controllers/masterStatus.controller");
+const merchantController = require("../controllers/merchant.controller");
 
 const router = express.Router();
 
 router
   .route("/")
-  .get(masterStatusController.getData)
-  .post(masterStatusController.addData);
+  .get(merchantController.getData)
+  .post(merchantController.addData);
   
   router
   .route("/:id")
-  .get(masterStatusController.getSpecificData)
-  .patch(masterStatusController.updateData)
-  .delete(masterStatusController.deleteData);
+  .get(merchantController.getSpecificData)
+  .patch(merchantController.updateData)
+  .delete(merchantController.deleteData);
 
 module.exports = router;

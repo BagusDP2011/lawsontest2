@@ -1,17 +1,17 @@
 const express = require("express");
-const masterStatusController = require("../controllers/masterStatus.controller");
+const cityController = require("../controllers/city.controller");
 
 const router = express.Router();
 
 router
   .route("/")
-  .get(masterStatusController.getData)
-  .post(masterStatusController.addData);
+  .get(cityController.getData)
+  .post(cityController.addData);
   
   router
   .route("/:id")
-  .get(masterStatusController.getSpecificData)
-  .patch(masterStatusController.updateData)
-  .delete(masterStatusController.deleteData);
+  .get(cityController.getSpecificData)
+  .patch(cityController.updateData)
+  .delete(cityController.deleteData);
 
 module.exports = router;

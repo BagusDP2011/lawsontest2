@@ -2,7 +2,7 @@ const MasterStatus = require("../models/MasterStatus");
 
 const getData = async (req, res) => {
   const data = await MasterStatus.findAll({});
-  if (!data) throw new Error("name is not found");
+  if (!data) throw new Error("No data is found");
   res.send(data);
 };
 
@@ -23,7 +23,7 @@ const addData = async (req, res) => {
 const updateData = async (req, res) => {
   const { name, description } = req.body;
   const data = await MasterStatus.findOne({
-    where: { id: req.params.user_id },
+    where: { id: req.params.id },
   });
   data.set({ name, description });
   await data.save();
@@ -32,7 +32,7 @@ const updateData = async (req, res) => {
 
 const deleteData = async (req, res) => {
   const data = await MasterStatus.findOne({
-    where: { id: req.params.user_id },
+    where: { id: req.params.id },
   });
   await data.destroy();
   res.status(204).send();

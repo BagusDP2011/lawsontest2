@@ -1,38 +1,38 @@
-const MasterStatus = require("../models/MasterStatus");
+const Merchant = require("../models/Merchant");
 
 const getData = async (req, res) => {
-  const data = await MasterStatus.findAll({});
-  if (!data) throw new Error("name is not found");
+  const data = await Merchant.findAll({});
+  if (!data) throw new Error("No data found");
   res.send(data);
 };
 
 const getSpecificData = async (req, res) => {
-  const data = await MasterStatus.findOne({ where: { id: req.params.id } });
+  const data = await Merchant.findOne({ where: { id: req.params.id } });
   if (!data) {return res.status(400).json("Data not found")};
   res.send(data);
 };
 
 const addData = async (req, res) => {
-  const { name, description } = req.body;
-  if (!name) {res.status(400).json("name is required")};
-  if (!description) {res.status(400).json("description is required")};
-  const data = await MasterStatus.create({ name, description });
+  const { merchant_name, address, city_id, phone, expire_date } = req.body;
+  if (!merchant_name) {res.status(400).json("merchant_name is required")};
+  if (!address) {res.status(400).json("description is required")};
+  const data = await Merchant.create({ merchant_name, address, city_id, phone, expire_date });
   res.send(data);
 };
 
 const updateData = async (req, res) => {
-  const { name, description } = req.body;
-  const data = await MasterStatus.findOne({
-    where: { id: req.params.user_id },
+  const { merchant_name, address, city_id, phone, expire_date } = req.body;
+  const data = await Merchant.findOne({
+    where: { id: req.params.id },
   });
-  data.set({ name, description });
+  data.set({ merchant_name, address, city_id, phone, expire_date });
   await data.save();
   res.status(200).send(data);
 };
 
 const deleteData = async (req, res) => {
-  const data = await MasterStatus.findOne({
-    where: { id: req.params.user_id },
+  const data = await Merchant.findOne({
+    where: { id: req.params.id },
   });
   await data.destroy();
   res.status(204).send();
